@@ -1,0 +1,271 @@
+@import 'tw-animate-css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  --radius: 0.75rem;
+  --sidebar: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  --sidebar: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 224.3 76.3% 48%;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background: 
+      linear-gradient(135deg, hsl(var(--primary) / 0.08) 0%, transparent 50%),
+      linear-gradient(225deg, hsl(var(--primary) / 0.05) 0%, transparent 50%),
+      linear-gradient(45deg, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, hsl(var(--primary) / 0.04) 0%, transparent 50%),
+      hsl(var(--background));
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .shadow-input {
+    box-shadow: 
+      0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+      0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+      0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+  }
+
+  @keyframes gradient {
+    to {
+      background-position: var(--bg-size, 300%) 0;
+    }
+  }
+
+  .animate-gradient {
+    animation: gradient 8s linear infinite;
+  }
+
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+  
+  .glass-card {
+    @apply bg-gradient-to-br from-card/90 via-card/80 to-card/90 backdrop-blur-xl border-2 border-border/60 shadow-xl shadow-black/10;
+    background-image: 
+      linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, transparent 50%),
+      linear-gradient(225deg, hsl(var(--primary) / 0.03) 0%, transparent 50%);
+  }
+  
+  .gradient-border {
+    @apply relative;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 -z-10;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+  }
+  
+  .smooth-transition {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl;
+  }
+  
+  .premium-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .premium-shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05),
+      0 0 0 1px rgba(0, 0, 0, 0.05), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary;
+  }
+  
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%);
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.2);
+  }
+  
+  @keyframes wave1 {
+    0%, 100% { d: path("M0,100 Q300,50 600,100 T1200,100"); }
+    25% { d: path("M0,120 Q300,70 600,120 T1200,120"); }
+    50% { d: path("M0,100 Q300,50 600,100 T1200,100"); }
+    75% { d: path("M0,80 Q300,30 600,80 T1200,80"); }
+  }
+  
+  @keyframes wave2 {
+    0%, 100% { d: path("M0,150 Q300,100 600,150 T1200,150"); }
+    25% { d: path("M0,170 Q300,120 600,170 T1200,170"); }
+    50% { d: path("M0,150 Q300,100 600,150 T1200,150"); }
+    75% { d: path("M0,130 Q300,80 600,130 T1200,130"); }
+  }
+  
+  @keyframes wave3 {
+    0%, 100% { d: path("M0,200 Q300,150 600,200 T1200,200"); }
+    25% { d: path("M0,220 Q300,170 600,220 T1200,220"); }
+    50% { d: path("M0,200 Q300,150 600,200 T1200,200"); }
+    75% { d: path("M0,180 Q300,130 600,180 T1200,180"); }
+  }
+  
+  @keyframes wave4 {
+    0%, 100% { d: path("M0,250 Q300,200 600,250 T1200,250"); }
+    25% { d: path("M0,270 Q300,220 600,270 T1200,270"); }
+    50% { d: path("M0,250 Q300,200 600,250 T1200,250"); }
+    75% { d: path("M0,230 Q300,180 600,230 T1200,230"); }
+  }
+  
+  @keyframes wave5 {
+    0%, 100% { d: path("M0,300 Q300,250 600,300 T1200,300"); }
+    25% { d: path("M0,320 Q300,270 600,320 T1200,320"); }
+    50% { d: path("M0,300 Q300,250 600,300 T1200,300"); }
+    75% { d: path("M0,280 Q300,230 600,280 T1200,280"); }
+  }
+  
+  @keyframes wave6 {
+    0%, 100% { d: path("M0,350 Q300,300 600,350 T1200,350"); }
+    25% { d: path("M0,370 Q300,320 600,370 T1200,370"); }
+    50% { d: path("M0,350 Q300,300 600,350 T1200,350"); }
+    75% { d: path("M0,330 Q300,280 600,330 T1200,330"); }
+  }
+  
+  @keyframes wave7 {
+    0%, 100% { d: path("M0,400 Q300,350 600,400 T1200,400"); }
+    25% { d: path("M0,420 Q300,370 600,420 T1200,420"); }
+    50% { d: path("M0,400 Q300,350 600,400 T1200,400"); }
+    75% { d: path("M0,380 Q300,330 600,380 T1200,380"); }
+  }
+  
+  @keyframes wave8 {
+    0%, 100% { d: path("M0,450 Q300,400 600,450 T1200,450"); }
+    25% { d: path("M0,470 Q300,420 600,470 T1200,470"); }
+    50% { d: path("M0,450 Q300,400 600,450 T1200,450"); }
+    75% { d: path("M0,430 Q300,380 600,430 T1200,430"); }
+  }
+  
+  @keyframes wave9 {
+    0%, 100% { d: path("M0,500 Q300,450 600,500 T1200,500"); }
+    25% { d: path("M0,520 Q300,470 600,520 T1200,520"); }
+    50% { d: path("M0,500 Q300,450 600,500 T1200,500"); }
+    75% { d: path("M0,480 Q300,430 600,480 T1200,480"); }
+  }
+  
+  @keyframes dashPulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+  }
+  
+  @keyframes aurora {
+    from {
+      background-position: 50% 50%, 50% 50%;
+    }
+    to {
+      background-position: 350% 50%, 350% 50%;
+    }
+  }
+  
+  .animate-aurora {
+    animation: aurora 60s linear infinite;
+  }
+  
+  @keyframes meteor {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(215deg) translateX(-500px);
+      opacity: 0;
+    }
+  }
+  
+  .animate-meteor-effect {
+    animation: meteor linear infinite;
+  }
+}
