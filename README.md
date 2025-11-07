@@ -310,15 +310,3 @@ npm start        # Start production server
 4. **Email sending fails**: Check AWS SES credentials and region
 5. **File upload fails**: Verify R2 credentials and bucket configuration
 
-## 📄 License
-
-This project is private and proprietary.
-
-## 👥 Contributing
-
-This is a private project. For contributions, please contact the project maintainers.
-
-## 📞 Support
-
-For issues and questions, please contact the development team.
-
