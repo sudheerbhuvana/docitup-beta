@@ -1,33 +1,35 @@
-# Frontend Dockerfile - Build stage
-FROM node:20-alpine AS builder
+# Multi-stage build for React app
 
-# Set working directory
+FROM node:18-alpine AS builder
+
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install all dependencies (including dev dependencies for build)
 RUN npm ci
 
-# Copy application source
+# Copy source code
 COPY . .
 
-# Build the application
+# Build the app
 RUN npm run build
 
-# Production stage - Serve with nginx
-FROM nginx:alpine
+# Production stage
+FROM node:18-alpine AS production
 
-# Copy built files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Copy nginx configuration (optional - uses default if not provided)
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Install serve for static file serving
+RUN npm install -g serve
+
+# Copy built app from builder stage
+COPY --from=builder /app/dist ./dist
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the built app
+CMD ["serve", "-s", "dist", "-l", "3000"]
 
