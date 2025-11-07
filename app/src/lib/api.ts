@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { logger } from './logger';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://api-docitup.sudheerbhuvana.in/api';
 
 // Create axios instance
 export const api = axios.create({

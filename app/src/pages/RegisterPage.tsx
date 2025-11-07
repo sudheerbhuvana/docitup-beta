@@ -57,7 +57,7 @@ export default function RegisterPage() {
 
       setUsernameLoading(true);
       try {
-        const response = await fetch(`http://localhost:5001/api/auth/check-username/${username}`);
+        const response = await fetch(`https://api-docitup.sudheerbhuvana.in/api/auth/check-username/${username}`);
         const data = await response.json();
         setUsernameAvailable(data.available);
         setUsernameChecked(true);
